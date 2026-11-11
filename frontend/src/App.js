@@ -16,7 +16,10 @@ import Account from "@/pages/Account";
 import Studio from "@/pages/Studio";
 import Admin from "@/pages/Admin";
 import PaymentResult from "@/pages/PaymentResult";
+import Artists from "@/pages/Artists";
+import Cart from "@/pages/Cart";
 import PageLoader from "@/components/PageLoader";
+import { CartProvider } from "@/context/CartContext";
 
 export { default as PageLoader } from "@/components/PageLoader";
 
@@ -128,51 +131,55 @@ function App() {
     return (
         <ErrorBoundary>
             <AuthProvider>
-                <LenisRoot />
-                <BrowserRouter>
-                    <ScrollManager />
-                    <div className="grain min-h-screen bg-obsidian text-bone">
-                        <Nav />
-                        <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/exhibition/:slug" element={<Exhibition />} />
-                            <Route path="/vault" element={<Vault />} />
-                            <Route path="/timeless" element={<Timeless />} />
-                            <Route path="/polls" element={<Polls />} />
-                            <Route path="/login/:role" element={<AuthPage mode="login" />} />
-                            <Route path="/register/:role" element={<AuthPage mode="register" />} />
-                            <Route
-                                path="/account"
-                                element={
-                                    <Guard role="customer">
-                                        <Account />
-                                    </Guard>
-                                }
-                            />
-                            <Route
-                                path="/studio"
-                                element={
-                                    <Guard role="artist">
-                                        <Studio />
-                                    </Guard>
-                                }
-                            />
-                            <Route
-                                path="/admin"
-                                element={
-                                    <Guard role="admin">
-                                        <Admin />
-                                    </Guard>
-                                }
-                            />
-                            <Route path="/payment/success" element={<PaymentResult success />} />
-                            <Route path="/payment/cancel" element={<PaymentResult />} />
-                            <Route path="*" element={<NotFound />} />
-                        </Routes>
-                        <Footer />
-                        <Toaster position="bottom-right" />
-                    </div>
-                </BrowserRouter>
+                <CartProvider>
+                    <LenisRoot />
+                    <BrowserRouter>
+                        <ScrollManager />
+                        <div className="grain min-h-screen bg-obsidian text-bone">
+                            <Nav />
+                            <Routes>
+                                <Route path="/" element={<Home />} />
+                                <Route path="/exhibition/:slug" element={<Exhibition />} />
+                                <Route path="/vault" element={<Vault />} />
+                                <Route path="/timeless" element={<Timeless />} />
+                                <Route path="/polls" element={<Polls />} />
+                                <Route path="/artists" element={<Artists />} />
+                                <Route path="/cart" element={<Cart />} />
+                                <Route path="/login/:role" element={<AuthPage mode="login" />} />
+                                <Route path="/register/:role" element={<AuthPage mode="register" />} />
+                                <Route
+                                    path="/account"
+                                    element={
+                                        <Guard role="customer">
+                                            <Account />
+                                        </Guard>
+                                    }
+                                />
+                                <Route
+                                    path="/studio"
+                                    element={
+                                        <Guard role="artist">
+                                            <Studio />
+                                        </Guard>
+                                    }
+                                />
+                                <Route
+                                    path="/admin"
+                                    element={
+                                        <Guard role="admin">
+                                            <Admin />
+                                        </Guard>
+                                    }
+                                />
+                                <Route path="/payment/success" element={<PaymentResult success />} />
+                                <Route path="/payment/cancel" element={<PaymentResult />} />
+                                <Route path="*" element={<NotFound />} />
+                            </Routes>
+                            <Footer />
+                            <Toaster position="bottom-right" />
+                        </div>
+                    </BrowserRouter>
+                </CartProvider>
             </AuthProvider>
         </ErrorBoundary>
     );

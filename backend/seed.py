@@ -26,9 +26,9 @@ IMG = {
 }
 
 
-async def seed():
+async def seed(include_demo_users=True):
     # ---------- users ----------
-    if os.environ.get('SEED_DEMO_USERS', '').lower() == 'true':
+    if include_demo_users and os.environ.get('SEED_DEMO_USERS', '').lower() == 'true':
         users = [
             ('customer@smolcomp.art', 'customer123', 'Aanya Verma', 'customer', 'approved', '', ''),
             ('mira.artisan@smolcomp.art', 'artist123', 'Mira Khatri', 'artist', 'approved', 'Ajrakh Block Printing', 'Bhuj, Kutch'),

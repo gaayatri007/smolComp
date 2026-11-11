@@ -1,6 +1,8 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
+import { useCart } from "@/context/CartContext";
+import { ShoppingBag } from "lucide-react";
 
 const portalPath = (role) => {
     if (role === "admin") return "/admin";
@@ -10,6 +12,7 @@ const portalPath = (role) => {
 
 export default function Nav() {
     const { user, logout } = useAuth();
+    const { items } = useCart();
     const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
     const [signOutError, setSignOutError] = useState("");
@@ -30,6 +33,7 @@ export default function Nav() {
         { to: "/vault", label: "Secret vault" },
         { to: "/timeless", label: "Timeless" },
         { to: "/polls", label: "Region poll" },
+        { to: "/artists", label: "Artists" },
     ];
 
     return (
@@ -61,6 +65,19 @@ export default function Nav() {
                             {link.label}
                         </NavLink>
                     ))}
+                    <NavLink
+                        to="/cart"
+                        className={({ isActive }) => `nav-cart${isActive ? " is-active" : ""}`}
+                        onClick={() => setMenuOpen(false)}
+                        aria-label={`Shopping basket, ${items.reduce((count, item) => count + (item.quantity || 1), 0)} items`}
+                        data-testid="nav-cart"
+                    >
+                        <ShoppingBag size={17} aria-hidden="true" />
+                        <span>Basket</span>
+                        <span className="cart-count" data-testid="cart-count">
+                            {items.reduce((count, item) => count + (item.quantity || 1), 0)}
+                        </span>
+                    </NavLink>
                     <span className="season-chip">SEASON I · KUTCH</span>
                     {user && user !== false ? (
                         <div className="nav-account">

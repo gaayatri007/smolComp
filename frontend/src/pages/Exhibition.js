@@ -1,22 +1,19 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ArtworkCard from "@/components/ArtworkCard";
 import PageLoader from "@/components/PageLoader";
 import { api, formatPrice, mediaUrl } from "@/lib/api";
-import { useAuth } from "@/context/AuthContext";
+import { useCart } from "@/context/CartContext";
 
 export default function Exhibition() {
     const { slug } = useParams();
-    const navigate = useNavigate();
-    const { user } = useAuth();
+    const { addItem } = useCart();
     const [season, setSeason] = useState(null);
     const [series, setSeries] = useState([]);
     const [artworks, setArtworks] = useState([]);
     const [boxes, setBoxes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-    const [actionError, setActionError] = useState("");
-
     useEffect(() => {
         let active = true;
         Promise.all([
@@ -41,38 +38,20 @@ export default function Exhibition() {
         return () => { active = false; };
     }, [slug]);
 
-    const buyArtwork = async (artwork) => {
-        if (!user || user === false) {
-            navigate("/login/customer");
-            return;
-        }
-        setActionError("");
-        try {
-            const result = await api("/payments/checkout", {
-                method: "POST",
-                body: JSON.stringify({ artwork_id: artwork.id, origin_url: window.location.origin, quantity: 1 }),
-            });
-            window.location.assign(result.checkout_url);
-        } catch (requestError) {
-            setActionError(requestError.message);
-        }
+    const addArtwork = (artwork) => {
+        addItem({
+            id: artwork.id,
+            type: "artwork",
+            name: artwork.title,
+            kind: artwork.kind,
+            artist: artwork.artist_name,
+            image: artwork.image,
+            price: artwork.price,
+        });
     };
 
-    const buyBox = async (box) => {
-        if (!user || user === false) {
-            navigate("/login/customer");
-            return;
-        }
-        setActionError("");
-        try {
-            const result = await api("/payments/checkout", {
-                method: "POST",
-                body: JSON.stringify({ box_id: box.id, origin_url: window.location.origin, quantity: 1 }),
-            });
-            window.location.assign(result.checkout_url);
-        } catch (requestError) {
-            setActionError(requestError.message);
-        }
+    const addBox = (box) => {
+        addItem({ id: box.id, type: "box", name: box.name, image: box.image, price: box.price });
     };
 
     if (loading) return <PageLoader />;
@@ -95,8 +74,6 @@ export default function Exhibition() {
                             <span className="season-status">{season.status} season</span>
                         </div>
                     </section>
-                    {actionError && <div className="notice notice-error" role="alert">{actionError}</div>}
-
                     <section className="content-section content-section-flush">
                         <div className="split-heading">
                             <div><p className="eyebrow">The makers and their methods</p><h2 className="display-title">Series in this season</h2></div>
@@ -120,7 +97,7 @@ export default function Exhibition() {
                         </div>
                         {artworks.length ? (
                             <div className="artwork-grid">
-                                {artworks.map((artwork) => <ArtworkCard key={artwork.id} artwork={artwork} onBuy={buyArtwork} />)}
+                                {artworks.map((artwork) => <ArtworkCard key={artwork.id} artwork={artwork} onBuy={addArtwork} />)}
                             </div>
                         ) : <div className="empty-panel"><p>The collection is being curated. Please return soon.</p></div>}
                     </section>
@@ -136,7 +113,7 @@ export default function Exhibition() {
                                         <div className="box-card-art">{box.image ? <img src={mediaUrl(box.image)} alt="" /> : <span>01</span>}</div>
                                         <div className="box-card-copy">
                                             <h3>{box.name}</h3><p>{formatPrice(box.price)} · Common, rare, or secret</p>
-                                            <button className="button button-small" onClick={() => buyBox(box)} type="button" data-testid={`exhibition-buy-box-${box.id}`}>Open a box</button>
+                                            <button className="button button-small" onClick={() => addBox(box)} type="button" data-testid={`exhibition-buy-box-${box.id}`}>Add to basket</button>
                                         </div>
                                     </article>
                                 ))}

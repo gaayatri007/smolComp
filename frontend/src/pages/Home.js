@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ArtworkCard from "@/components/ArtworkCard";
 import PageLoader from "@/components/PageLoader";
 import { api, formatPrice, mediaUrl } from "@/lib/api";
-import { useAuth } from "@/context/AuthContext";
+import { useCart } from "@/context/CartContext";
 
 export default function Home() {
     const [content, setContent] = useState({ seasons: [], series: [], boxes: [], artworks: [] });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-    const [actionError, setActionError] = useState("");
-    const { user } = useAuth();
-    const navigate = useNavigate();
+    const { addItem } = useCart();
 
     useEffect(() => {
         let active = true;
@@ -31,25 +29,26 @@ export default function Home() {
     const liveSeason = content.seasons.find((season) => season.status === "live");
     const featuredSeries = content.series.filter((series) => series.season_slug === liveSeason?.slug).slice(0, 3);
 
-    const buyBox = async (box) => {
-        setActionError("");
-        if (!user || user === false) {
-            navigate("/login/customer");
-            return;
-        }
-        try {
-            const result = await api("/payments/checkout", {
-                method: "POST",
-                body: JSON.stringify({
-                    box_id: box.id,
-                    origin_url: window.location.origin,
-                    quantity: 1,
-                }),
-            });
-            window.location.assign(result.checkout_url);
-        } catch (requestError) {
-            setActionError(requestError.message);
-        }
+    const addBox = (box) => {
+        addItem({
+            id: box.id,
+            type: "box",
+            name: box.name || "Seasonal Blind Box",
+            image: box.image,
+            price: box.price,
+        });
+    };
+
+    const addArtwork = (artwork) => {
+        addItem({
+            id: artwork.id,
+            type: "artwork",
+            name: artwork.title,
+            kind: artwork.kind,
+            artist: artwork.artist_name,
+            image: artwork.image,
+            price: artwork.price,
+        });
     };
 
     if (loading) return <PageLoader />;
@@ -89,8 +88,6 @@ export default function Home() {
             </section>
 
             {error && <div className="notice notice-error" role="alert" data-testid="home-load-error">{error}</div>}
-            {actionError && <div className="notice notice-error" role="alert">{actionError}</div>}
-
             <section className="marquee-band" aria-label="Craft traditions">
                 <div className="marquee-track">
                     {["Ajrakh block print", "Rabari embroidery", "Rogan oil painting", "Bell metal craft", "Kutch clay"].map((craft) => (
@@ -135,6 +132,13 @@ export default function Home() {
                 )}
             </section>
 
+            <section className="makers-invitation">
+                <p className="eyebrow">Every piece begins with a person</p>
+                <h2 className="display-title">Meet the makers behind the work.</h2>
+                <p>Visit the studios, learn the practices, and hear the stories carried from one generation to the next.</p>
+                <Link className="button button-quiet" to="/artists">About the artists</Link>
+            </section>
+
             <section className="content-section content-section-muted">
                 <div className="split-heading">
                     <div>
@@ -159,8 +163,8 @@ export default function Home() {
                                     <p>Common 60% · Rare 30% · Secret 10%</p>
                                     <div className="box-card-footer">
                                         <strong>{formatPrice(box.price)}</strong>
-                                        <button className="button button-small" type="button" onClick={() => buyBox(box)} data-testid={`buy-box-${box.id}`}>
-                                            Open a box
+                                        <button className="button button-small" type="button" onClick={() => addBox(box)} data-testid={`buy-box-${box.id}`}>
+                                            Add to basket
                                         </button>
                                     </div>
                                 </div>
@@ -185,7 +189,7 @@ export default function Home() {
                 {content.artworks.length ? (
                     <div className="artwork-grid">
                         {content.artworks.slice(0, 3).map((artwork) => (
-                            <ArtworkCard key={artwork.id} artwork={artwork} />
+                            <ArtworkCard key={artwork.id} artwork={artwork} onBuy={addArtwork} />
                         ))}
                     </div>
                 ) : (

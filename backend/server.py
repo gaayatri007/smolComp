@@ -3,6 +3,7 @@ import logging
 import os
 import random
 import re
+import secrets
 import uuid
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -352,6 +353,20 @@ async def get_artworks(series: str = '', season: str = '', timeless: str = '', r
     return [public_artwork(a) for a in docs]
 
 
+@api_router.get('/artists')
+async def get_artists():
+    docs = await db.users.find({'role': 'artist', 'status': 'approved'}).sort('name', ASCENDING).to_list(500)
+    return [{
+        'id': artist.get('id') or artist['_id'],
+        'name': artist.get('name', ''),
+        'craft': artist.get('craft', ''),
+        'region': artist.get('region', ''),
+        'bio': artist.get('bio', ''),
+        'profile_image': artist.get('profile_image', ''),
+        'is_demo': bool(artist.get('is_demo')),
+    } for artist in docs]
+
+
 @api_router.get('/boxes')
 async def get_boxes(series: str = ''):
     q = {}
@@ -372,6 +387,7 @@ async def get_vault():
 
 class PollIn(BaseModel):
     model_config = ConfigDict(extra='ignore')
+    season_slug: str = ''
     question: str
     description: str = ''
     options: List[str]
@@ -718,8 +734,110 @@ async def admin_users(role: str = '', status: str = '', user: dict = Depends(req
         q['role'] = role
     if status:
         q['status'] = status
-    docs = await db.users.find(q).sort('created_at', DESCENDING).to_list(200)
+    docs = await db.users.find(q).sort('created_at', DESCENDING).to_list(500)
     return out_many(docs)
+
+
+@api_router.post('/admin/demo/seed')
+async def admin_seed_demo(admin: dict = Depends(require_role('admin'))):
+    from seed import seed as seed_catalog
+
+    await seed_catalog(include_demo_users=False)
+    profiles = [
+        {
+            'name': 'Mira Khatri',
+            'email': 'mira.khatri@artist.example.com',
+            'craft': 'Ajrakh block printing',
+            'region': 'Bhuj, Kutch',
+            'bio': 'A sample studio exploring the small surprises left behind by indigo, resist, and a well-worn block.',
+            'profile_image': 'https://images.unsplash.com/photo-1655376407042-b35a5c396cae?crop=entropy&cs=srgb&fm=jpg&q=85',
+        },
+        {
+            'name': 'Lila Rabari',
+            'email': 'lila.rabari@artist.example.com',
+            'craft': 'Rabari embroidery',
+            'region': 'Central Kutch',
+            'bio': 'A fictional sample maker profile for exploring the artist studio and its submission flow.',
+            'profile_image': 'https://images.unsplash.com/photo-1701964620963-4dcaab6d020f?crop=entropy&cs=srgb&fm=jpg&q=85',
+        },
+        {
+            'name': 'Devi Kumbhar',
+            'email': 'devi.kumbhar@artist.example.com',
+            'craft': 'Kutch pottery',
+            'region': 'Nirona, Kutch',
+            'bio': 'A fictional sample maker profile for previewing how artist stories appear in the gallery.',
+            'profile_image': 'https://images.unsplash.com/photo-1697410154066-7bedf97b8e9a?crop=entropy&cs=srgb&fm=jpg&q=85',
+        },
+    ]
+    demo_accounts = [
+        {
+            'name': profile['name'],
+            'email': profile['email'],
+            'role': 'artist',
+            'account_profile': profile,
+            'status': 'approved',
+        }
+        for profile in profiles
+    ]
+    demo_accounts.append({
+        'name': 'Gallery Guest',
+        'email': 'gallery.guest@customer.example.com',
+        'role': 'customer',
+        'account_profile': {
+            'name': 'Gallery Guest',
+            'email': 'gallery.guest@customer.example.com',
+            'craft': '',
+            'region': '',
+            'bio': 'A fictional sample collector account for previewing the customer experience.',
+        },
+        'status': 'approved',
+    })
+    credentials = []
+    for account in demo_accounts:
+        profile = account['account_profile']
+        if await db.users.find_one({'email': profile['email']}):
+            continue
+        password = secrets.token_urlsafe(24)
+        user_id = str(uuid.uuid4())
+        await db.users.insert_one({
+            '_id': user_id,
+            'id': user_id,
+            **profile,
+            'password_hash': hash_password(password),
+            'role': account['role'],
+            'status': account['status'],
+            'is_demo': True,
+            'created_at': now_utc(),
+        })
+        credentials.append({
+            'name': account['name'],
+            'email': profile['email'],
+            'role': account['role'],
+            'password': password,
+        })
+    return {
+        'message': 'Sample collection is ready. Save the new demo passwords now; they are only returned once.',
+        'new_demo_accounts': credentials,
+    }
+
+
+@api_router.get('/admin/polls')
+async def admin_polls(admin: dict = Depends(require_role('admin'))):
+    polls = await db.polls.find().sort('created_at', DESCENDING).to_list(200)
+    results = []
+    for poll in polls:
+        counts = {}
+        async for vote_doc in db.votes.find({'poll_id': poll['_id']}):
+            counts[vote_doc['option_id']] = counts.get(vote_doc['option_id'], 0) + 1
+        results.append(out({
+            **poll,
+            'id': poll['_id'],
+            'options': [
+                {'id': option['id'], 'label': option['label'], 'votes': counts.get(option['id'], 0)}
+                for option in poll.get('options', [])
+            ],
+        }))
+    return results
 
 
 class UserStatusIn(BaseModel):
@@ -830,6 +948,12 @@ async def admin_create_artwork(input: dict, admin: dict = Depends(require_role('
     return out(doc)
 
 
+@api_router.get('/admin/boxes')
+async def admin_boxes(admin: dict = Depends(require_role('admin'))):
+    docs = await db.blind_boxes.find().sort('created_at', DESCENDING).to_list(200)
+    return out_many(docs)
+
+
 @api_router.post('/admin/boxes')
 async def admin_create_box(input: dict, admin: dict = Depends(require_role('admin'))):
     doc = {
@@ -855,6 +979,7 @@ async def admin_create_poll(input: PollIn, admin: dict = Depends(require_role('a
         raise HTTPException(status_code=400, detail='At least two options required')
     doc = {
         '_id': f'poll-{slugify(input.question)}-{str(uuid.uuid4())[:6]}',
+        'season_slug': input.season_slug,
         'question': input.question,
         'description': input.description,
         'options': [{'id': slugify(o) or str(uuid.uuid4())[:8], 'label': o, 'votes': 0} for o in input.options],

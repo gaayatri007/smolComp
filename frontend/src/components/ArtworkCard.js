@@ -1,6 +1,6 @@
 import { formatPrice, mediaUrl } from "@/lib/api";
 
-export default function ArtworkCard({ artwork, onBuy, actionLabel = "Acquire piece" }) {
+export default function ArtworkCard({ artwork, onBuy, actionLabel = "Add to basket" }) {
     const image = mediaUrl(artwork.image);
     return (
         <article className="artwork-card" data-testid={`artwork-${artwork.id || artwork.title}`}>

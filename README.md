@@ -40,7 +40,9 @@ The deployment setup uses GitHub as the source, Render for the FastAPI backend, 
 
 The backend reads environment settings at startup. Without `STRIPE_API_KEY`, checkout is disabled while the rest of the API can run; payment verification via webhooks also requires `STRIPE_WEBHOOK_SECRET`. `EMERGENT_LLM_KEY` is optional and is only needed for the configured object-storage integration; add it privately in Render if required. Without it, storage-dependent upload features may not work.
 
-A fresh database has no catalog content. To load the bundled sample seasons, artworks, boxes, and polls, configure `backend/.env` with the intended database, then run this once from the repository root:
+A fresh database has no catalog content. After deploying the backend and signing in to the admin page, use **Set up sample seasons & artists** to load the bundled seasons, artworks, blind boxes, polls, approved sample artist profiles, and a sample customer account. The action is safe to repeat: existing sample records are left in place. Newly created demo passwords are generated at setup time and shown only once in the admin page; save them privately if you want to test the artist and customer portals.
+
+For local development, you can still configure `backend/.env` with the intended database and load the bundled catalog from the backend directory:
 
 ```powershell
 cd backend
@@ -48,7 +50,11 @@ cd backend
 py seed.py
 ```
 
-The sample customer and artist accounts with published demo passwords are disabled by default; `SEED_DEMO_USERS=true` enables them for local demos only. Do not enable that option in production. The API seeds the admin account from the private `ADMIN_EMAIL` and `ADMIN_PASSWORD` settings.
+The sample customer and artist accounts with published demo passwords are disabled by default; `SEED_DEMO_USERS=true` enables those legacy accounts for local demos only. Do not enable that option in production. The admin setup page instead creates approved sample artists and a customer preview with unique generated passwords. The API seeds the admin account from the private `ADMIN_EMAIL` and `ADMIN_PASSWORD` settings.
+
+The gallery includes an approved-artists directory and a browser-local shopping basket. Basket contents are not an order: checkout remains unavailable until Stripe is configured, and no payment is taken by the demo.
+
+The admin studio lists all accounts returned by the API, supports artist approval and artist-submission review, and manages seasons, collections, artwork, blind boxes, and polls. The account list refreshes automatically every 15 seconds and can also be refreshed manually.
 
 ### 4. Deploy the frontend to Firebase Hosting
 
