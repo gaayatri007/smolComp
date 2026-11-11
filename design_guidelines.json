@@ -1,0 +1,147 @@
+{
+  "project_name": "smolComp",
+  "archetype": "Dark Museum Gallery with Earthy Handcrafted Warmth",
+  "theme": "Dark",
+  "visual_mood": "Awwwards Site-of-the-Day level digital reliquary. Obsidian black gallery halls punctuated by spotlight beams, raw clay terracotta (#C86D51), deep indigo block-print blue (#1E2B37), antique brass gold (#D4AF37), and bone white linen (#F5F2EC). Museum curation meets tactile craft and mystery gacha mechanics.",
+  "typography": {
+    "headings": {
+      "family": "Cormorant Garamond, serif",
+      "weights": ["300 (Light)", "400 (Regular)", "600 (SemiBold)", "700 (Bold)"],
+      "h1_scale": "text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight leading-none",
+      "h2_scale": "text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight",
+      "h3_scale": "text-xl sm:text-2xl font-medium",
+      "h4_scale": "text-lg sm:text-xl font-medium",
+      "rule": "DO NOT use Inter or generic sans for headings. Use Cormorant Garamond or Bodoni Moda with tight letter-spacing for headlines."
+    },
+    "subtitles_and_accents": {
+      "family": "Space Mono, monospace",
+      "weights": ["400", "700"],
+      "styling": "uppercase tracking-[0.2em] text-xs font-mono text-amber-200/70"
+    },
+    "body": {
+      "family": "Plus Jakarta Sans, sans-serif",
+      "weights": ["300", "400", "500", "600"],
+      "styling": "text-base text-stone-300 leading-relaxed font-light"
+    }
+  },
+  "colors": {
+    "backgrounds": {
+      "obsidian_hall": "#0C0C0E",
+      "gallery_surface": "#141418",
+      "card_surface": "#1B1B22",
+      "elevated_surface": "#24242E",
+      "modal_overlay": "rgba(12, 12, 14, 0.85)"
+    },
+    "accents": {
+      "terracotta_clay": "#C86D51",
+      "kutch_indigo": "#2D4356",
+      "antique_brass": "#D4AF37",
+      "rogan_ochre": "#E5A93C",
+      "rabari_vermilion": "#D9381E",
+      "bone_linen": "#F5F2EC"
+    },
+    "text": {
+      "primary": "#F5F2EC",
+      "secondary": "#A1A1AA",
+      "muted": "#71717A",
+      "gold_highlight": "#F3E5AB"
+    },
+    "borders": {
+      "subtle": "rgba(245, 242, 236, 0.1)",
+      "gold_rim": "rgba(212, 175, 55, 0.3)",
+      "clay_stroke": "rgba(200, 109, 81, 0.25)"
+    },
+    "contrast_rules": "Always ensure text contrast ratio is >= 4.5:1. Explicitly set text color on all hover states (e.g., hover:bg-amber-900/40 hover:text-amber-100). Never rely on default dark mode opacity."
+  },
+  "visual_enhancers": {
+    "spotlight_effect": "Radial gradient masks mimicking ceiling spotlight beams over dark velvet walls (bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent)",
+    "film_grain": "CSS SVG grain noise overlay with opacity-20 for tactile analog feel across museum walls",
+    "gacha_silhouettes": "Drop-shadow and brightness-0 invert filter effects for secret vault artwork hints with shimmering glowing outline on hover",
+    "glassmorphism": "backdrop-blur-xl bg-black/60 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
+  },
+  "layout_and_spacing": {
+    "hero_section": "Kinetic Hero with line-by-line masked text reveal, signature canvas backdrop, floating edition badges, season countdown timer, and Lenis momentum scroll trigger",
+    "grid_modes": {
+      "mode_a_tetris_gallery": "grid-cols-1 md:grid-cols-8 lg:grid-cols-12 gap-8 lg:gap-12 for showcasing Season 1 Kutch collection (Hero spotlight span-8, square artifact span-4, tall tapestry span-4 row-span-2)",
+      "mode_b_dashboard": "grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 for Admin panel, Artist submissions, and Customer artifact vault"
+    },
+    "navigation": "Sticky glassmorphism header (z-50) with smolComp mark SVG favicon logo, Season badge, Nav links (Exhibition, Blind Box, Secret Vault, Timeless, Region Poll, Cart), and Role-Switch Auth quick actions"
+  },
+  "key_components": [
+    {
+      "name": "KineticHero",
+      "description": "Awwwards signature on-load reveal with staggered split-line text animation, ambient gallery lighting, and interactive Season 1: Kutch banner."
+    },
+    {
+      "name": "EditorialMarquee",
+      "description": "Slow organic drift marquee featuring traditional Kutch craft terms (Ajrakh Block Print • Rabari Embroidery • Rogan Oil Painting • Bell Metal Craft • Kutch Clay Pottery) in muted gold Cormorant Garamond."
+    },
+    {
+      "name": "SeasonalExhibitionGrid",
+      "description": "Spotlight catalog of buyable artifacts from Kutch artists with hi-res image modal zoom, artist bio popover, technique tag, price, and Add to Cart / Buy Now."
+    },
+    {
+      "name": "BlindBoxGachaExperience",
+      "description": "Interactive mystery box purchase flow with 3D-style chest drop animation, tier probabilities (Common 60%, Rare 30%, Legendary Secret 10%), instant reveal suspense, and direct checkout."
+    },
+    {
+      "name": "SecretVault",
+      "description": "Dark mysterious chamber showcasing silhouettes & cryptic lore hints of ultra-rare upcoming unreleased art pieces."
+    },
+    {
+      "name": "TimelessSeriesSection",
+      "description": "Perennial masterpieces showcased year-round outside seasonal rotates."
+    },
+    {
+      "name": "RegionPollSurvey",
+      "description": "Interactive community polling page where visitors vote on Season 2 regions (e.g. Bastar Metalcraft, Bengal Jamdani, Ladakh Woodcarving, Kerala Mural Art) with live percentage bars."
+    },
+    {
+      "name": "AuthPagesAndDashboards",
+      "description": "Distinct portals for Customer (vault collection, orders), Artist (portfolio submission, earnings), and Admin (curation approval, season toggle, demand metrics)."
+    },
+    {
+      "name": "StripeCheckoutModal",
+      "description": "Full mock Stripe test checkout flow with credit card simulator, shipping details, order confirmation breakdown, and downloadable digital provenance certificate."
+    }
+  ],
+  "motion_and_libraries": {
+    "lenis": "Smooth momentum scrolling configured for fluid museum walk-through feel",
+    "framer_motion": "Staggered scroll reveals, tab transitions, modal scale-ups, blind box gacha shake & unlock animations",
+    "icons": "lucide-react or @phosphor-icons/react for clean tactile iconography"
+  },
+  "image_urls": {
+    "pottery_1": "https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHxoYW5kY3JhZnRlZCUyMEluZGlhbiUyMHRleHRpbGVzJTIwcG90dGVyeSUyMGVtYnJvaWRlcnklMjBhcnRpc2FuJTIwY3JhZnR8ZW58MHx8fHwxNzk0MzY4MTc1fDA&ixlib=rb-4.1.0&q=85",
+    "pottery_shaping": "https://images.unsplash.com/photo-1595351298020-038700609878?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzl8MHwxfHNlYXJjaHwyfHxwb3R0ZXJ5JTIwY2VyYW1pY3MlMjBhcnRpc2FuJTIwaGFuZG1hZGUlMjB2YXNlJTIwc3R1ZGlvfGVufDB8fHx8MTc5NDM2ODE4Mnww&ixlib=rb-4.1.0&q=85",
+    "terracotta_vases": "https://images.unsplash.com/photo-1631125915902-d8abe9225ff2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzl8MHwxfHNlYXJjaHwxfHxwb3R0ZXJ5JTIwY2VyYW1pY3MlMjBhcnRpc2FuJTIwaGFuZG1hZGUlMjB2YXNlJTIwc3R1ZGlvfGVufDB8fHx8MTc5NDM2ODE4Mnww&ixlib=rb-4.1.0&q=85",
+    "craftsman_hands": "https://images.unsplash.com/photo-1655376407042-b35a5c396cae?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHw0fHxoYW5kY3JhZnRlZCUyMEluZGlhbiUyMHRleHRpbGVzJTIwcG90dGVyeSUyMGVtYnJvaWRlcnklMjBhcnRpc2FuJTIwY3JhZnR8ZW58MHx8fHwxNzk0MzY4MTc1fDA&ixlib=rb-4.1.0&q=85",
+    "gallery_exhibition": "https://images.unsplash.com/photo-1637578035851-c5b169722de1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2ODl8MHwxfHNlYXJjaHwzfHxkYXJrJTIwbXVzZXVtJTIwYXJ0JTIwZXhoaWJpdGlvbiUyMGdhbGxlcnklMjBzcG90bGlnaHQlMjBteXN0ZXJ5fGVufDB8fHx8MTc5NDM2ODE3NXww&ixlib=rb-4.1.0&q=85",
+    "gallery_artwork_view": "https://images.unsplash.com/photo-1606819717115-9159c900370b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2ODl8MHwxfHNlYXJjaHwxfHxkYXJrJTIwbXVzZXVtJTIwYXJ0JTIwZXhoaWJpdGlvbiUyMGdhbGxlcnklMjBzcG90bGlnaHQlMjBteXN0ZXJ5fGVufDB8fHx8MTc5NDM2ODE3NXww&ixlib=rb-4.1.0&q=85",
+    "textile_thread": "https://images.unsplash.com/photo-1641305534843-b7447fbc1c21?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHw0fHx0ZXh0aWxlJTIwZW1icm9pZGVyeSUyMGJsb2NrJTIwcHJpbnQlMjBzaWxrJTIwYXJ0aXNhbiUyMHBhdHRlcm58ZW58MHx8fHwxNzk0MzY4MTgyfDA&ixlib=rb-4.1.0&q=85",
+    "textile_pattern": "https://images.unsplash.com/photo-1720982892402-5380e855320c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwyfHx0ZXh0aWxlJTIwZW1icm9pZGVyeSUyMGJsb2NrJTIwcHJpbnQlMjBzaWxrJTIwYXJ0aXNhbiUyMHBhdHRlcm58ZW58MHx8fHwxNzk0MzY4MTgyfDA&ixlib=rb-4.1.0&q=85",
+    "embroidered_fabric": "https://images.unsplash.com/photo-1701964620963-4dcaab6d020f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHx0ZXh0aWxlJTIwZW1icm9pZGVyeSUyMGJsb2NrJTIwcHJpbnQlMjBzaWxrJTIwYXJ0aXNhbiUyMHBhdHRlcm58ZW58MHx8fHwxNzk0MzY4MTgyfDA&ixlib=rb-4.1.0&q=85"
+  },
+  "instructions_to_main_agent": [
+    "Ensure smolComp branding is consistent with Season 1 focus: Kutch, Gujarat, India.",
+    "Implement distinct routes/views for Customer, Artist, and Admin portals.",
+    "Include a dynamic blind-box gacha system with suspenseful unpacking animation.",
+    "Add test-id attributes to all interactive elements for test automation.",
+    "Support full Stripe test checkout flow with interactive modal, input validation, and successful purchase state.",
+    "Use Lenis for smooth momentum scrolling and Framer Motion for scroll-triggered entrance reveals."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. In frontend design, this creates what users call the 'AI slop' aesthetic. Avoid this: make creative, distinctive frontends that surprise and delight.",
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients.",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy.",
+    "Use glass-morphism effects with backdrop filters (12-24px blur).",
+    "You MUST NOT apply universal transition. Eg: transition: all. This results in breaking transforms. Always add transitions for specific interactive elements like button, input excluding transforms.",
+    "You MUST NOT center align the app container, ie do not add .App { text-align: center; } in the css file. This disrupts the human natural reading flow of text.",
+    "Always use modern button styles like pill-shaped, or sharp button with interaction animations & color relevant to the app style.",
+    "NEVER: use AI assistant Emoji characters like 🤖🧠💭💡🔮🎯 etc for icons.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects, and entrance animations. Static = dead.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "Subtle grain textures, noise overlays, custom cursors, selection states, and loading animations: separates good from extraordinary.",
+    "All interactive and key informational elements MUST include a data-testid attribute to facilitate robust automated testing."
+  ]
+}

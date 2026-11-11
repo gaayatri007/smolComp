@@ -1,0 +1,1350 @@
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid rgba(245, 242, 236, 0.08);
+    background: rgba(12, 12, 14, 0.88);
+    backdrop-filter: blur(18px);
+}
+
+.site-header-inner {
+    width: min(1440px, calc(100% - 48px));
+    min-height: 76px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.brand-lockup {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    color: var(--bone);
+    text-decoration: none;
+    font: 600 19px "Cormorant Garamond", Georgia, serif;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+.brand-mark {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(212, 175, 55, 0.6);
+    border-radius: 50%;
+    color: var(--brass);
+    font: italic 22px "Cormorant Garamond", Georgia, serif;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 2vw, 29px);
+}
+
+.nav-link,
+.text-button {
+    border: 0;
+    background: none;
+    color: #b7b4ad;
+    font: 500 11px "Space Mono", monospace;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    cursor: pointer;
+    transition: color 160ms ease;
+}
+
+.nav-link:hover,
+.nav-link.is-active,
+.text-button:hover {
+    color: var(--goldlight);
+}
+
+.nav-account {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.text-button {
+    font-size: 10px;
+    color: #8d8a84;
+}
+
+.nav-visit {
+    padding: 11px 15px;
+    border: 1px solid rgba(212, 175, 55, 0.42);
+    color: var(--goldlight);
+    font: 10px "Space Mono", monospace;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 160ms ease, border-color 160ms ease;
+}
+
+.nav-visit:hover {
+    border-color: var(--brass);
+    background: rgba(212, 175, 55, 0.1);
+}
+
+.season-chip,
+.eyebrow {
+    color: rgba(212, 175, 55, 0.8);
+    font: 10px "Space Mono", monospace;
+    letter-spacing: 0.16em;
+    line-height: 1.6;
+    text-transform: uppercase;
+}
+
+.menu-toggle {
+    display: none;
+    padding: 8px 10px;
+    border: 1px solid rgba(245, 242, 236, 0.2);
+    background: transparent;
+    color: var(--bone);
+    font: 10px "Space Mono", monospace;
+    text-transform: uppercase;
+}
+
+.nav-error {
+    position: absolute;
+    top: 100%;
+    right: 24px;
+    max-width: 360px;
+    padding: 10px 14px;
+    border: 1px solid rgba(217, 56, 30, 0.55);
+    background: var(--gallery);
+    color: var(--bone);
+    font-size: 12px;
+}
+
+.home-hero {
+    position: relative;
+    min-height: min(740px, calc(100vh - 76px));
+    padding: clamp(56px, 9vw, 130px) max(24px, calc((100% - 1320px) / 2));
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.78fr);
+    align-items: center;
+    gap: clamp(36px, 8vw, 120px);
+    overflow: hidden;
+}
+
+.hero-copy {
+    position: relative;
+    z-index: 2;
+    max-width: 650px;
+}
+
+.hero-title {
+    margin: 22px 0;
+    color: var(--bone);
+    font: 300 clamp(58px, 8vw, 112px)/0.88 "Cormorant Garamond", Georgia, serif;
+    letter-spacing: -0.045em;
+}
+
+.hero-title em {
+    color: var(--brass);
+    font-weight: 300;
+}
+
+.hero-description {
+    max-width: 470px;
+    color: #b8b5ae;
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+.hero-actions,
+.result-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 22px;
+    margin-top: 30px;
+}
+
+.button {
+    display: inline-flex;
+    min-height: 46px;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 19px;
+    border: 1px solid var(--brass);
+    background: var(--brass);
+    color: var(--obsidian);
+    font: 11px "Space Mono", monospace;
+    letter-spacing: 0.08em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+.button:hover:not(:disabled) {
+    border-color: var(--goldlight);
+    background: var(--goldlight);
+    color: var(--obsidian);
+}
+
+.button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.button-small {
+    min-height: 36px;
+    padding: 9px 12px;
+    font-size: 9px;
+}
+
+.button-quiet {
+    border-color: rgba(245, 242, 236, 0.2);
+    background: transparent;
+    color: var(--bone);
+}
+
+.button-quiet:hover:not(:disabled) {
+    border-color: var(--bone);
+    background: rgba(245, 242, 236, 0.08);
+    color: var(--bone);
+}
+
+.quiet-link {
+    color: #d3cfc5;
+    font: 11px "Space Mono", monospace;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: color 160ms ease;
+}
+
+.quiet-link:hover {
+    color: var(--goldlight);
+}
+
+.hero-caption {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: clamp(42px, 8vw, 100px);
+    color: #a7a39c;
+    font-size: 12px;
+}
+
+.hero-art {
+    position: relative;
+    min-height: 500px;
+    max-height: 620px;
+    height: 60vh;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.26);
+    background: #1b1b22;
+    box-shadow: 22px 22px 0 rgba(212, 175, 55, 0.06);
+}
+
+.hero-art::after {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(12, 12, 14, 0.92), transparent 58%);
+    content: "";
+}
+
+.hero-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.75);
+}
+
+.hero-art-label {
+    position: absolute;
+    z-index: 1;
+    right: 28px;
+    bottom: 30px;
+    left: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.hero-art-label strong {
+    font: 36px "Cormorant Garamond", Georgia, serif;
+}
+
+.hero-art-label > span:last-child {
+    color: #c3beb4;
+    font-size: 12px;
+}
+
+.hero-index {
+    position: absolute;
+    right: max(24px, calc((100% - 1320px) / 2));
+    bottom: 22px;
+    color: rgba(245, 242, 236, 0.3);
+    font: 10px "Space Mono", monospace;
+    letter-spacing: 0.15em;
+}
+
+.marquee-band {
+    overflow: hidden;
+    padding: 23px 0;
+    border-top: 1px solid rgba(245, 242, 236, 0.08);
+    border-bottom: 1px solid rgba(245, 242, 236, 0.08);
+    background: #141418;
+}
+
+.marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 44px;
+    animation: craft-drift 42s linear infinite;
+    color: #c8b880;
+    font: italic 24px "Cormorant Garamond", Georgia, serif;
+    white-space: nowrap;
+}
+
+.marquee-track i {
+    color: var(--clay);
+    font-style: normal;
+}
+
+@keyframes craft-drift {
+    to { transform: translateX(-30%); }
+}
+
+.page-wrap {
+    width: min(1320px, calc(100% - 48px));
+    min-height: 66vh;
+    margin: 0 auto;
+    padding: clamp(54px, 8vw, 112px) 0;
+}
+
+.section-heading {
+    max-width: 800px;
+    margin-bottom: clamp(36px, 6vw, 76px);
+}
+
+.display-title {
+    margin: 12px 0 16px;
+    color: var(--bone);
+    font: 400 clamp(40px, 6.3vw, 76px)/0.98 "Cormorant Garamond", Georgia, serif;
+    letter-spacing: -0.035em;
+}
+
+.section-description {
+    max-width: 540px;
+    color: #aaa69d;
+    font-size: 14px;
+    line-height: 1.85;
+}
+
+.split-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 32px;
+}
+
+.split-heading .display-title {
+    margin-bottom: 0;
+}
+
+.split-heading > .section-description {
+    margin: 0;
+}
+
+.content-section {
+    padding: clamp(64px, 9vw, 120px) max(24px, calc((100% - 1320px) / 2));
+}
+
+.content-section-flush {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.content-section-muted {
+    background: #141418;
+}
+
+.site-shell {
+    min-height: 100vh;
+}
+
+.series-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 18px;
+}
+
+.series-tile {
+    position: relative;
+    min-height: 320px;
+    overflow: hidden;
+    border: 1px solid rgba(245, 242, 236, 0.08);
+    background: #24242e;
+    color: var(--bone);
+    text-decoration: none;
+}
+
+.series-tile-1 {
+    grid-row: span 2;
+    min-height: 660px;
+}
+
+.series-tile img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.66);
+    transition: transform 450ms ease, filter 450ms ease;
+}
+
+.series-tile:hover img {
+    transform: scale(1.035);
+    filter: saturate(0.95);
+}
+
+.series-tile::after {
+    position: absolute;
+    inset: 25% 0 0;
+    background: linear-gradient(0deg, rgba(12, 12, 14, 0.94), transparent);
+    content: "";
+}
+
+.series-tile-copy {
+    position: absolute;
+    z-index: 1;
+    right: 28px;
+    bottom: 27px;
+    left: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.series-tile-copy strong {
+    font: 36px "Cormorant Garamond", Georgia, serif;
+}
+
+.series-tile-copy > span:last-child {
+    max-width: 520px;
+    color: #d0ccc3;
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+.artwork-grid,
+.box-grid,
+.vault-grid,
+.reveal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.artwork-card,
+.box-card,
+.vault-card,
+.poll-card,
+.metric-card,
+.review-card,
+.panel-form,
+.dashboard-panel,
+.auth-form,
+.revealed-card {
+    border: 1px solid rgba(245, 242, 236, 0.09);
+    background: #141418;
+}
+
+.artwork-image-wrap {
+    position: relative;
+    height: 310px;
+    overflow: hidden;
+    background: #24242e;
+}
+
+.artwork-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.76);
+    transition: transform 400ms ease, filter 400ms ease;
+}
+
+.artwork-card:hover .artwork-image {
+    transform: scale(1.035);
+    filter: saturate(1);
+}
+
+.artwork-placeholder {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: rgba(245, 242, 236, 0.45);
+    font: 9px "Space Mono", monospace;
+    letter-spacing: 0.2em;
+}
+
+.vault-symbol {
+    color: var(--brass);
+    font: 44px "Cormorant Garamond", Georgia, serif;
+}
+
+.rarity-tag,
+.status-pill {
+    display: inline-block;
+    padding: 7px 9px;
+    border: 1px solid rgba(245, 242, 236, 0.18);
+    background: rgba(12, 12, 14, 0.78);
+    color: #e4dfd4;
+    font: 9px "Space Mono", monospace;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.rarity-tag {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+
+.rarity-rare {
+    border-color: rgba(229, 169, 60, 0.55);
+    color: var(--goldlight);
+}
+
+.rarity-secret {
+    border-color: rgba(200, 109, 81, 0.65);
+    color: #efb6a2;
+}
+
+.artwork-copy {
+    padding: 20px;
+}
+
+.artwork-copy h3,
+.box-card-copy h3,
+.submission-row h3,
+.review-card h3 {
+    margin: 8px 0;
+    color: var(--bone);
+    font: 26px "Cormorant Garamond", Georgia, serif;
+}
+
+.artwork-copy > p:not(.eyebrow),
+.box-card-copy > p,
+.review-card p {
+    color: #aaa69d;
+    font-size: 12px;
+    line-height: 1.75;
+}
+
+.artwork-card-footer,
+.box-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.price-label,
+.sold-label {
+    color: var(--goldlight);
+    font: 13px "Space Mono", monospace;
+}
+
+.sold-label {
+    color: #8e8a82;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.box-card {
+    overflow: hidden;
+}
+
+.box-card-art {
+    position: relative;
+    height: 240px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: #1b1b22;
+    color: rgba(212, 175, 55, 0.3);
+    font: 100px "Cormorant Garamond", Georgia, serif;
+}
+
+.box-card-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.6) brightness(0.72);
+}
+
+.box-seal {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    padding: 8px 11px;
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    background: rgba(12, 12, 14, 0.75);
+    color: var(--goldlight);
+    font: 9px "Space Mono", monospace;
+    letter-spacing: 0.16em;
+}
+
+.box-card-copy {
+    padding: 20px;
+}
+
+.box-card-copy .button {
+    flex-shrink: 0;
+}
+
+.empty-panel {
+    padding: 34px;
+    border: 1px solid rgba(245, 242, 236, 0.09);
+    background: rgba(20, 20, 24, 0.72);
+    color: #aaa69d;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.empty-panel h2 {
+    color: var(--bone);
+    font: 30px "Cormorant Garamond", Georgia, serif;
+}
+
+.empty-panel a,
+.inline-note a,
+.auth-switch a,
+.portal-switch a {
+    color: var(--goldlight);
+}
+
+.notice {
+    margin: 16px 0;
+    padding: 13px 16px;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.notice-error {
+    border: 1px solid rgba(217, 56, 30, 0.45);
+    background: rgba(100, 25, 16, 0.24);
+    color: #ffc1af;
+}
+
+.notice-success {
+    border: 1px solid rgba(82, 145, 105, 0.5);
+    background: rgba(33, 75, 48, 0.24);
+    color: #c2e7ca;
+}
+
+.season-banner {
+    position: relative;
+    min-height: 430px;
+    display: flex;
+    align-items: end;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.22);
+    background: #1b1b22;
+}
+
+.season-banner > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.65);
+}
+
+.season-banner-shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(12, 12, 14, 0.96), rgba(12, 12, 14, 0.06) 90%);
+}
+
+.season-banner-copy {
+    position: relative;
+    max-width: 740px;
+    padding: clamp(28px, 6vw, 76px);
+}
+
+.season-banner-copy .display-title {
+    margin: 14px 0;
+}
+
+.season-banner-copy > p:not(.eyebrow) {
+    color: #d0ccc3;
+    line-height: 1.8;
+}
+
+.season-status {
+    display: inline-block;
+    margin-top: 12px;
+    color: var(--goldlight);
+    font: 9px "Space Mono", monospace;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.series-list {
+    display: grid;
+    gap: 15px;
+}
+
+.series-row {
+    display: grid;
+    grid-template-columns: minmax(140px, 0.34fr) 1fr;
+    gap: 25px;
+    align-items: center;
+    padding: 14px;
+    border: 1px solid rgba(245, 242, 236, 0.08);
+    background: #141418;
+}
+
+.series-row img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+}
+
+.series-row h3 {
+    margin: 7px 0;
+    font: 31px "Cormorant Garamond", Georgia, serif;
+}
+
+.series-row p:not(.eyebrow) {
+    color: #aaa69d;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.vault-counter {
+    margin: -34px 0 34px;
+    color: #969189;
+    font: 10px "Space Mono", monospace;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.vault-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.vault-card {
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
+}
+
+.vault-card-art {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    background: #0c0c0e;
+    color: rgba(245, 242, 236, 0.5);
+}
+
+.vault-sigil {
+    color: rgba(212, 175, 55, 0.42);
+    font: 70px "Cormorant Garamond", Georgia, serif;
+}
+
+.vault-card-copy {
+    padding: 25px;
+    align-self: center;
+}
+
+.vault-card-copy h2,
+.revealed-card h2 {
+    color: var(--bone);
+    font: 31px "Cormorant Garamond", Georgia, serif;
+}
+
+.vault-card-copy p:not(.eyebrow),
+.revealed-card p:not(.eyebrow) {
+    color: #aaa69d;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.poll-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.poll-card {
+    padding: clamp(22px, 4vw, 38px);
+}
+
+.poll-card h2 {
+    margin: 10px 0;
+    font: 34px/1.1 "Cormorant Garamond", Georgia, serif;
+}
+
+.poll-description,
+.poll-footnote {
+    color: #9c988f;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.poll-options {
+    display: grid;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.poll-option {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(245, 242, 236, 0.12);
+    background: #1b1b22;
+    color: var(--bone);
+    text-align: left;
+    cursor: pointer;
+}
+
+.poll-option:disabled {
+    cursor: default;
+}
+
+.poll-option:not(:disabled):hover,
+.poll-option.is-voted {
+    border-color: rgba(212, 175, 55, 0.58);
+}
+
+.poll-option-label {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 12px;
+}
+
+.poll-option-label strong {
+    color: var(--goldlight);
+    font: 11px "Space Mono", monospace;
+}
+
+.poll-meter {
+    height: 3px;
+    display: block;
+    margin-top: 11px;
+    background: rgba(245, 242, 236, 0.1);
+}
+
+.poll-meter > span {
+    height: 100%;
+    display: block;
+    background: var(--brass);
+    transition: width 250ms ease;
+}
+
+.inline-note {
+    margin: -28px 0 30px;
+    color: #aaa69d;
+    font-size: 12px;
+}
+
+.auth-page {
+    width: min(1180px, calc(100% - 48px));
+    min-height: 75vh;
+    margin: 0 auto;
+    padding: clamp(48px, 8vw, 104px) 0;
+    display: grid;
+    grid-template-columns: 1fr minmax(320px, 0.78fr);
+    align-items: center;
+    gap: clamp(40px, 9vw, 130px);
+}
+
+.auth-aside {
+    max-width: 580px;
+}
+
+.auth-aside > p:not(.eyebrow) {
+    max-width: 450px;
+    margin: 20px 0 30px;
+    color: #aaa69d;
+    font-size: 14px;
+    line-height: 1.85;
+}
+
+.auth-form {
+    padding: clamp(24px, 4vw, 42px);
+}
+
+.auth-form h2,
+.panel-form h2 {
+    margin: 8px 0 24px;
+    font: 30px "Cormorant Garamond", Georgia, serif;
+}
+
+.field {
+    display: grid;
+    gap: 8px;
+    margin: 15px 0;
+    color: #c4bfb5;
+    font: 10px "Space Mono", monospace;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
+
+.field input,
+.field textarea,
+.field select {
+    width: 100%;
+    min-height: 44px;
+    padding: 11px 12px;
+    border: 1px solid rgba(245, 242, 236, 0.15);
+    border-radius: 0;
+    outline: none;
+    background: #0c0c0e;
+    color: var(--bone);
+    font: 13px "Plus Jakarta Sans", sans-serif;
+    letter-spacing: normal;
+    text-transform: none;
+}
+
+.field textarea {
+    resize: vertical;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+    border-color: rgba(212, 175, 55, 0.72);
+}
+
+.field input[type="file"] {
+    padding: 9px;
+    font-size: 11px;
+}
+
+.auth-submit {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.auth-switch,
+.portal-switch {
+    margin: 18px 0 0;
+    color: #a7a39c;
+    font-size: 12px;
+}
+
+.auth-switch a,
+.portal-switch a {
+    text-decoration: none;
+}
+
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.75fr) 1.25fr;
+    align-items: start;
+    gap: 24px;
+}
+
+.panel-form,
+.dashboard-panel {
+    padding: clamp(20px, 3vw, 32px);
+}
+
+.panel-form .button {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.submission-list,
+.review-list {
+    display: grid;
+    gap: 12px;
+}
+
+.submission-row {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+    border-bottom: 1px solid rgba(245, 242, 236, 0.08);
+}
+
+.submission-row img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.submission-row h3 {
+    font-size: 22px;
+}
+
+.submission-row > strong {
+    color: var(--goldlight);
+    font: 11px "Space Mono", monospace;
+}
+
+.status-pill {
+    margin-top: 6px;
+    background: transparent;
+}
+
+.status-approved {
+    color: #a9deb6;
+}
+
+.status-pending {
+    color: var(--goldlight);
+}
+
+.status-rejected {
+    color: #efb6a2;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 48px;
+}
+
+.metric-card {
+    min-height: 130px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.metric-card strong {
+    color: var(--bone);
+    font: 36px "Cormorant Garamond", Georgia, serif;
+}
+
+.review-card {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 22px;
+}
+
+.review-card h3 {
+    font-size: 25px;
+}
+
+.review-actions {
+    display: flex;
+    flex-shrink: 0;
+    gap: 8px;
+}
+
+.review-actions-stack {
+    width: min(260px, 100%);
+    flex-direction: column;
+}
+
+.review-actions-stack .field {
+    margin: 0 0 4px;
+}
+
+.reveal-button {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.result-page {
+    max-width: 1000px;
+    min-height: 65vh;
+}
+
+.result-page > p:not(.eyebrow) {
+    max-width: 650px;
+    color: #aaa69d;
+    line-height: 1.8;
+}
+
+.revealed-card {
+    padding: 16px;
+}
+
+.revealed-card img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+}
+
+.site-footer {
+    border-top: 1px solid rgba(245, 242, 236, 0.08);
+    background: #0a0a0b;
+}
+
+.site-footer-inner {
+    width: min(1320px, calc(100% - 48px));
+    min-height: 120px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.site-footer p {
+    color: #8f8b83;
+    font-size: 12px;
+}
+
+.page-loader {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: #aaa69d;
+    font: 10px "Space Mono", monospace;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.loader-mark {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    border-radius: 50%;
+    color: var(--brass);
+    font: italic 28px "Cormorant Garamond", Georgia, serif;
+    animation: loader-breathe 1.8s ease-in-out infinite;
+}
+
+@keyframes loader-breathe {
+    50% { opacity: 0.45; }
+}
+
+@media (max-width: 960px) {
+    .site-header-inner {
+        width: calc(100% - 36px);
+    }
+
+    .menu-toggle {
+        display: block;
+        margin-left: auto;
+    }
+
+    .main-nav {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        display: none;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 0;
+        padding: 10px 18px 20px;
+        border-bottom: 1px solid rgba(245, 242, 236, 0.12);
+        background: rgba(12, 12, 14, 0.98);
+    }
+
+    .main-nav.is-open {
+        display: flex;
+    }
+
+    .main-nav > .nav-link,
+    .main-nav > .nav-visit,
+    .main-nav > .season-chip,
+    .nav-account {
+        padding: 13px 7px;
+    }
+
+    .nav-account {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .home-hero {
+        min-height: 0;
+        grid-template-columns: 1fr 0.72fr;
+    }
+
+    .hero-art {
+        min-height: 400px;
+        height: 50vh;
+    }
+
+    .artwork-grid,
+    .box-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dashboard-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 680px) {
+    .site-header-inner,
+    .site-footer-inner {
+        width: calc(100% - 32px);
+    }
+
+    .site-header-inner {
+        min-height: 66px;
+    }
+
+    .home-hero {
+        padding: 64px 20px 56px;
+        grid-template-columns: 1fr;
+        gap: 34px;
+    }
+
+    .hero-title {
+        font-size: clamp(58px, 17vw, 88px);
+    }
+
+    .hero-art {
+        min-height: 370px;
+        height: 52vh;
+    }
+
+    .hero-index {
+        display: none;
+    }
+
+    .page-wrap {
+        width: calc(100% - 32px);
+        padding: 54px 0;
+    }
+
+    .content-section {
+        padding: 58px 20px;
+    }
+
+    .content-section-flush {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .split-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .series-grid,
+    .artwork-grid,
+    .box-grid,
+    .vault-grid,
+    .poll-list,
+    .reveal-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .series-tile,
+    .series-tile-1 {
+        min-height: 360px;
+        grid-row: auto;
+    }
+
+    .artwork-image-wrap {
+        height: 290px;
+    }
+
+    .vault-card {
+        grid-template-columns: 1fr;
+    }
+
+    .vault-card-art {
+        min-height: 220px;
+    }
+
+    .auth-page {
+        width: calc(100% - 32px);
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .season-banner {
+        min-height: 390px;
+    }
+
+    .season-banner-copy {
+        padding: 26px;
+    }
+
+    .series-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .series-row img {
+        height: 220px;
+    }
+
+    .metrics-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .review-card {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .review-actions {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .review-actions .button {
+        flex: 1;
+    }
+
+    .submission-row {
+        grid-template-columns: 60px 1fr;
+    }
+
+    .submission-row img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .submission-row > strong {
+        grid-column: 2;
+    }
+
+    .site-footer-inner {
+        min-height: 160px;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+        gap: 7px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}

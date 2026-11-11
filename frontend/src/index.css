@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    /* smolComp museum tokens */
+    --obsidian: #0C0C0E;
+    --gallery: #141418;
+    --surface: #1B1B22;
+    --elevated: #24242E;
+    --clay: #C86D51;
+    --kutch: #2D4356;
+    --brass: #D4AF37;
+    --ochre: #E5A93C;
+    --vermilion: #D9381E;
+    --bone: #F5F2EC;
+
+    /* shadcn tokens mapped to the dark gallery */
+    --background: 240 7% 5%;
+    --foreground: 45 30% 95%;
+    --card: 240 8% 11%;
+    --card-foreground: 45 30% 95%;
+    --popover: 240 8% 8%;
+    --popover-foreground: 45 30% 95%;
+    --primary: 42 56% 52%;
+    --primary-foreground: 240 7% 6%;
+    --secondary: 240 5% 14%;
+    --secondary-foreground: 45 30% 95%;
+    --muted: 240 5% 14%;
+    --muted-foreground: 240 4% 55%;
+    --accent: 240 5% 14%;
+    --accent-foreground: 45 30% 95%;
+    --destructive: 5 78% 48%;
+    --destructive-foreground: 45 30% 95%;
+    --border: 240 5% 15%;
+    --input: 240 5% 15%;
+    --ring: 42 56% 52%;
+    --radius: 0.35rem;
+}
+
+* {
+    border-color: rgba(245, 242, 236, 0.08);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+body {
+    margin: 0;
+    background-color: var(--obsidian);
+    color: var(--bone);
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+::selection {
+    background: rgba(212, 175, 55, 0.85);
+    color: #0C0C0E;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #0C0C0E;
+}
+::-webkit-scrollbar-thumb {
+    background: #2a2a32;
+    border-radius: 8px;
+    border: 2px solid #0C0C0E;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #3d3d48;
+}
+
+/* film grain over the whole gallery */
+.grain::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    pointer-events: none;
+    opacity: 0.16;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.spotlight {
+    background: radial-gradient(ellipse 70% 55% at 50% 0%, rgba(229, 169, 60, 0.12), transparent 70%);
+}
+
+.spotlight-clay {
+    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(200, 109, 81, 0.14), transparent 70%);
+}
+
+.glass {
+    background: rgba(20, 20, 24, 0.6);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(245, 242, 236, 0.09);
+}
+
+.ghost-word {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(245, 242, 236, 0.13);
+}
+
+.silhouette {
+    filter: brightness(0) contrast(1.4);
+}
+
+.silhouette-veil {
+    background:
+        radial-gradient(ellipse at 50% 40%, rgba(229, 169, 60, 0.14), transparent 60%),
+        linear-gradient(180deg, rgba(12, 12, 14, 0.2), rgba(12, 12, 14, 0.92));
+}
+
+.shimmer-line {
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.6), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2.8s linear infinite;
+}
+
+.edge-frame {
+    position: relative;
+}
+.edge-frame::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.28);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.tabular {
+    font-variant-numeric: tabular-nums;
+}
