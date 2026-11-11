@@ -13,6 +13,7 @@ const portalPath = (role) => {
 export default function Nav() {
     const { user, logout } = useAuth();
     const { items } = useCart();
+    const cartCount = items.reduce((count, item) => count + (item.quantity || 1), 0);
     const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
     const [signOutError, setSignOutError] = useState("");
@@ -53,6 +54,17 @@ export default function Nav() {
                 >
                     {menuOpen ? "Close" : "Menu"}
                 </button>
+                <NavLink
+                    to="/cart"
+                    className={({ isActive }) => `nav-cart mobile-nav-cart${isActive ? " is-active" : ""}`}
+                    onClick={() => setMenuOpen(false)}
+                    aria-label={`Shopping basket, ${cartCount} items`}
+                    data-testid="nav-cart-mobile"
+                >
+                    <ShoppingBag size={17} aria-hidden="true" />
+                    <span>Basket</span>
+                    <span className="cart-count">{cartCount}</span>
+                </NavLink>
                 <nav className={`main-nav${menuOpen ? " is-open" : ""}`} aria-label="Main navigation">
                     {links.map((link) => (
                         <NavLink
@@ -69,13 +81,13 @@ export default function Nav() {
                         to="/cart"
                         className={({ isActive }) => `nav-cart${isActive ? " is-active" : ""}`}
                         onClick={() => setMenuOpen(false)}
-                        aria-label={`Shopping basket, ${items.reduce((count, item) => count + (item.quantity || 1), 0)} items`}
+                        aria-label={`Shopping basket, ${cartCount} items`}
                         data-testid="nav-cart"
                     >
                         <ShoppingBag size={17} aria-hidden="true" />
                         <span>Basket</span>
                         <span className="cart-count" data-testid="cart-count">
-                            {items.reduce((count, item) => count + (item.quantity || 1), 0)}
+                            {cartCount}
                         </span>
                     </NavLink>
                     <span className="season-chip">SEASON I · KUTCH</span>

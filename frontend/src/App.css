@@ -1360,6 +1360,10 @@
     text-transform: uppercase;
 }
 
+.mobile-nav-cart {
+    display: none;
+}
+
 .nav-cart:hover,
 .nav-cart.is-active {
     color: var(--goldlight);
@@ -1883,6 +1887,15 @@
 }
 
 @media (max-width: 960px) {
+    .mobile-nav-cart {
+        display: inline-flex;
+        margin-left: 12px;
+    }
+
+    .main-nav .nav-cart {
+        display: none;
+    }
+
     .main-nav > .nav-cart {
         padding: 13px 7px;
     }
